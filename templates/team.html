@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}
+<section class="refbox"><p>Code: <b>{{referral}}</b></p><p>Link: <b>{{request.host_url}}i/{{referral}}</b></p></section>
+<div class="team-counts"><div>♟ &nbsp; 0<br><small>Team</small></div><div>▣ &nbsp; 0<br><small>Income</small></div></div>
+{% for level,pct in [('Lv 1','10%'),('Lv 2','5%'),('Lv 3','2%')] %}
+<section class="level"><header><b>{{level}}</b><strong>{{pct}}</strong></header><div><span>0 Members</span><span>0 Bonus</span></div></section>
+{% endfor %}
+{% endblock %}

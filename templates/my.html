@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block content %}
+<div class="profile-line"><b>{{session.get('email','')}}</b><span>Anon</span><div class="logo">∞<small>Amazon</small></div></div>
+<section class="wallet"><div><span>Wallet</span><strong>0.00</strong></div><div><span>Balance</span><strong>0.00</strong></div><b class="chevron">⌄</b></section>
+<section class="menu-grid">
+{% for symbol,label in [('▣','Deposit'),('＄','Withdraw'),('▤','Bill'),('♧','Invite'),('♟','My team'),('★','VIP Task'),('☏','Manager'),('⚙','Settings'),('⇩','Download App')] %}
+<div class="menu-item"><i>{{symbol}}</i><span>{{label}}</span></div>
+{% endfor %}
+</section>
+<section class="salary"><div><span>Last month's salary</span><strong>0.00</strong></div><div><span>This month's salary</span><strong>0.00</strong></div><button type="button">Get last month's salary</button></section>
+<a class="logout" href="{{url_for('logout')}}">Log out</a>
+{% endblock %}

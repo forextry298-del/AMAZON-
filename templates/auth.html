@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}
+<div class="auth-shell"><div class="auth-tabs"><a class="{{'on' if mode=='signin' else ''}}" href="{{url_for('auth',mode='signin')}}">Sign In</a><a class="{{'on' if mode=='signup' else ''}}" href="{{url_for('auth',mode='signup')}}">Sign Up</a></div>
+<form method="post"><input type="hidden" name="mode" value="{{mode}}"><label>Email address</label><input name="email" type="email" placeholder="you@example.com" required><label>Password</label><input name="password" type="password" placeholder="••••••••" minlength="8" required>
+{% if mode=='signup' %}<label>Confirm Password</label><input name="confirm_password" type="password" placeholder="••••••••" minlength="8" required><label>Referral Code</label><input name="referral_code" placeholder="e.g. ABC123XY">{% endif %}
+<button class="yellow" type="submit">{{'Register' if mode=='signup' else 'Sign In'}}</button></form>
+{% if mode=='signin' %}<a class="forgot" href="{{url_for('auth',mode='signin')}}">Forgot password?</a>{% else %}<p class="hint">Have a referral code? Enter it above.</p>{% endif %}</div>
+{% endblock %}

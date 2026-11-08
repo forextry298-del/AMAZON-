@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<div class="tabs"><a class="{{'selected' if series=='B' else ''}}" href="{{url_for('ai',series='B')}}">B series</a><a class="{{'selected' if series=='F' else ''}}" href="{{url_for('ai',series='F')}}">F series</a><a class="{{'selected' if series=='W' else ''}}" href="{{url_for('ai',series='W')}}">W series</a></div>
+<div class="series-note">With {{series}} Series Machines, view machine information and income details.</div>
+{% if series=='B' %}
+{% for code,lock,price,total in [('B-1','10 Days','80,000.00','280,000.00'),('B-2','10 Days','200,000.00','720,000.00'),('B-3','10 Days','500,000.00','1,850,000.00'),('B-4','10 Days','1,000,000.00','3,800,000.00')] %}
+<article class="machine"><div class="machine-img">AMAZON</div><div><b>{{code}}</b><p>Lock: {{lock}}</p><p>Price: {{price}}</p><p>Total income: {{total}}</p></div></article>
+{% endfor %}
+{% endif %}
+{% endblock %}
