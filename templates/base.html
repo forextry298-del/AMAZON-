@@ -3,15 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#079b8a">
+<meta name="theme-color" content="#061B2D">
 <title>Amazon</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-<header class="topbar"><a class="brand" href="{{ url_for('home') }}">Amazon</a>{% if session.get('email') %}<a class="message" href="{{ url_for('my') }}">●</a>{% endif %}</header>
-<main class="page">{% with messages = get_flashed_messages() %}{% if messages %}<div class="notice">{% for m in messages %}{{m}}{% endfor %}</div>{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
+<body class="{{ 'home-page' if request.endpoint == 'home' else ('my-page' if request.endpoint == 'my' else ('team-page' if request.endpoint == 'team' else ('income-page' if request.endpoint == 'income' else ('bill-page' if request.endpoint == 'bill' else '')))) }}">
+{% if request.endpoint not in ["auth", "home", "team"] %}<header class="topbar">
+<a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">A</span><span class="brand-word">Armazon</span></a>
+{% if session.get('phone') or session.get('email') %}<a class="notification" href="#messages" aria-label="Notifications"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i></i></a>{% endif %}
+</header>{% endif %}
+<main class="page">{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, m in messages %}<div class="notice {% if category == 'error' %}notice-error{% elif category == 'success' %}notice-success{% endif %}">{{m}}</div>{% endfor %}{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
 {% if session.get('user_id') %}
-<nav class="bottom" aria-label="Main navigation">
+<a class="floating-support" href="{{ url_for('home') }}#messages" aria-label="Open customer support">
+  <span class="support-online"></span>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 13v-1a9 9 0 0 1 18 0v1"/>
+    <rect x="2.5" y="12" width="4.5" height="7" rx="2"/>
+    <rect x="17" y="12" width="4.5" height="7" rx="2"/>
+    <path d="M19.2 19c-.8 2-2.4 2.8-5.2 2.8h-1.5"/>
+    <path d="M12 15.2h.01"/>
+  </svg>
+</a>
+<nav class="bottom-nav" aria-label="Main navigation">
 <a class="{{'active' if active=='home' else ''}}" href="{{url_for('home')}}" aria-label="Home">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.7a.8.8 0 0 1-.8.8h-5.4v-6.2H9.2v6.2H3.8a.8.8 0 0 1-.8-.8z"/></svg><small>Home</small></a>
 <a class="{{'active' if active=='ai' else ''}}" href="{{url_for('ai')}}" aria-label="AI">

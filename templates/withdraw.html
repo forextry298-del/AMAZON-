@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block content %}
+<section class="finance-shell withdraw-shell">
+  <div class="finance-heading"><a href="{{url_for('my')}}" aria-label="Back">‹</a><div><span class="eyebrow">ACCOUNT SERVICES</span><h1>Withdraw funds</h1><p>Transfer your available earnings securely</p></div><span class="heading-icon">↗</span></div>
+  <div class="available-card"><div><span>AVAILABLE BALANCE</span><small>Ready to withdraw</small></div><strong>UGX {{'{:,.0f}'.format(balance)}}</strong></div>
+  <form method="post" class="finance-form">
+    <label for="withdraw-amount">Withdrawal amount</label><div class="amount-field"><span>UGX</span><input id="withdraw-amount" name="amount" type="number" min="1" step="1" placeholder="Enter amount" required></div>
+    <label for="withdraw-phone">Receiving mobile money number</label><input id="withdraw-phone" name="phone" type="tel" inputmode="tel" placeholder="07XXXXXXXX" required>
+    <div class="finance-hint"><b>Before you continue</b><p>Your available balance is checked before submission. The amount is reserved when your request is submitted. If the administrator rejects it, the amount is returned to your balance.</p></div>
+    <button class="finance-submit" type="submit">Submit withdrawal request <span>→</span></button>
+  </form>
+</section>{% endblock %}
